@@ -1,0 +1,44 @@
+body{
+    height: 100%;
+    background-image: url("groceries.jpg");
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+
+.container{
+    border-width: 2px;
+    border-color: blueviolet;
+    border-radius: 20px;
+    height: 500px;
+    width: 500px;
+    /*  position: absolute; */  
+    background: rgba(172, 189, 75, 0.7);
+    margin: 10px auto;
+    display: inline-block;
+    text-align: center;
+}
+
+.translucent{
+    background: rgba(172, 189, 75, 0.7);
+}
+
+
+.boonav{
+    background-image: linear-gradient(to right,rgba(255, 255, 255, 0.884), rgba(208, 255, 0, 0.774));
+}
+
+.margin-bottom{
+    margin-bottom: 100px;
+}
+
+.white{
+    color: white;
+}
+
+
+.curve{
+    border-radius: 50px;
+}
