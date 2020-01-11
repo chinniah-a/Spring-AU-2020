@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+      </head>
+    <body>
+      <div class="overlay" style="width: 50%; display: inline-block;">
+        
+        <input type="text"  placeholder="Name" >
+
+        <select style="display: inline-block;">
+          <option value="India">India</option>
+          <option value="Saudi">Saudi</option>
+          <option value="USA">USA</option>
+          <option value="Bahrain">Bahrain</option>
+        </select>
+        
+          <input type="text"  onkeyup="search()" style="display: inline-block;" id ="username" placeholder="username"><br><br>
+          <label for="result"> Users </label>
+          <textarea id="result" disabled class="textfield" rows="10" cols="30"></textarea>
+        <label for="sorted">Sorted</label>
+          <textarea rows="10" disabled cols="30" id="sorted" class="textfield">Start typing to see the sorted result here.</textarea>
+
+          <button onclick="sortunsorted()">Sort Users box</button>
+      </div>
+          <script src="app.js"></script>
+    </body>
+    
+</html>

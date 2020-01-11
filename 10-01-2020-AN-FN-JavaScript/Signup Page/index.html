@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <title>Signup</title>
+</head>
+<body>
+  <div class="container">
+
+    <h1 class="white center">Sign Up</h1>
+
+    <div class="form" >
+      <form action="#">
+        <input type="text"  class="textbox" id="username" autocomplete="false" autofocus required placeholder="Username">
+        <input type="password"  class="textbox" required id="password" placeholder="Password">
+        <input type="password"  class="textbox" required id="re-password" placeholder="Repeat password">
+        <input type="submit" class="button" onclick="validate()">
+      </form>
+    </div>
+    <div>
+      <p style="display: inline-block; font-weight: bold;" id="output"></p>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
