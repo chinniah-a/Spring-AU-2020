@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Surname</th>
+        <!-- <th>Age</th> -->
+        <th>Email</th>
+        <th>City</th>
+        <!-- <th>Pincode</th> -->
+        <th>Country</th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let record of data; let i = index">
+            <td>{{ record.name }}</td>
+            <td>{{ record.surname }}</td>
+            <!-- <td>{{ record.age }}</td> -->
+            <td>{{ record.email }}</td>
+            <td>{{ record.city }}</td>
+            <!-- <td>{{ record.pincode }}</td> -->
+            <td>{{ record.country }}</td>
+            <td><button class="delete" (click) = "deleteRecord(i)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>

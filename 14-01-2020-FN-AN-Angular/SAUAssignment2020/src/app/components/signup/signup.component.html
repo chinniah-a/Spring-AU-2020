@@ -1,0 +1,27 @@
+
+<div class="container">
+
+    <h1 class="white center">Sign Up</h1>
+    <div class="form" >
+<form [formGroup]="formGrp">
+    <input type="text" class="textbox" placeholder="Name" formControlName="name"><br>
+    <input type="text" class="textbox" placeholder="Surname" formControlName="surname"><br>
+    <!-- <input type="text" class="textbox" placeholder="Age" formControlName="age"><br> -->
+    <input type="email" ngModel [email]="true" class="textbox" placeholder="E-Mail" formControlName="email"><br>
+    <input type="text" class="textbox" placeholder="City" formControlName="city"><br>
+    <!-- <input type="text" class="textbox" placeholder="Pincode" formControlName="pincode"><br> -->
+    <input type="text" class="textbox" placeholder="Country" formControlName="country"><br>
+
+</form>
+
+<button class="button" (click) = "updateForm()">
+    AutoFill
+</button>
+
+<div *ngIf="formGrp.valid">
+    <button (click) = "processForm()" class="button" [disabled] = "!formGrp.valid">
+        Submit
+    </button><br>
+    </div>
+</div>
+</div>
