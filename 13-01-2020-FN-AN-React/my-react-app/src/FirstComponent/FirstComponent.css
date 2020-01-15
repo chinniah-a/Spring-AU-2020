@@ -1,0 +1,25 @@
+table{
+    width: 100%;
+    border-width: 2px;
+    border-style: dashed;
+}
+
+
+.textbox{
+    width: 50%;
+    margin: 0px auto;
+    height: 30px;
+    border-radius: 100px;
+    border-style: solid;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+
+.textbox:focus{
+    border-color: darkblue;
+}
+
+.FirstComponent{
+    text-align: center;
+}
