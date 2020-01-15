@@ -57,7 +57,7 @@ class FirstComponent extends Component  {
       
 
         <div className="Pollution">
-        <h1>Pollution Data : Search country wise</h1>
+        <h1>Pollution Data : Search Station wise</h1>
         <table>
           <tbody>
             <tr>
