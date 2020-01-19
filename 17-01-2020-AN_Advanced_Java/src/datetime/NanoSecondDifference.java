@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class NanoSecondDifference {
 
-	static void birthDayDifference(String self, String sibling){
-		
+	static void birthDayDifference(String self, String sibling){ // Difference in dates in nanoseconds and days
+		try {
 		long nanoseconds,days;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		
@@ -26,12 +26,19 @@ public class NanoSecondDifference {
 		
 		days = dayDifference(selfDateTime, siblingDateTime);
 		System.out.println("The difference between the birth time in Days is: "+days);
+		}
+		catch(Exception e) {
+			System.out.println("ERROR: Enter date in given format");
+		}
+
 		
 		
 	}
 	
-	static void timeZoneDifference(String self, String sibling) {
+	static void timeZoneDifference(String self, String sibling, String timeZone) {  //Convert To a different timezone and calculate difference in days
 		
+		
+		try {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		
 		LocalDate selfDate = LocalDate.parse(self,formatter);
@@ -44,10 +51,14 @@ public class NanoSecondDifference {
 
 		//days = dayDifference(selfDateTime, time);
 		System.out.println("The difference between the birth time in Days is: "+Math.abs(ChronoUnit.DAYS.between(selfDateTime, time)));
-		
+		}
+		catch(Exception e) {
+			System.out.println("ERROR: Enter appropriate time zone");
+		}
+
 	}
 	
-	
+	// Day difference in LocalDateTime
 	public static long nanosecondDifference(LocalDateTime date1, LocalDateTime date2) {
 		return Math.abs(ChronoUnit.NANOS.between(date1, date2));	
 	}
@@ -56,16 +67,20 @@ public class NanoSecondDifference {
 		return Math.abs(ChronoUnit.DAYS.between(date1, date2));	
 	}
 	
+	
+	
+	// Driver Class
 	public static void main(String[] args) {
 		
 		Scanner s = new Scanner(System.in);
-		System.out.print("Enter date in dd/mm/yyyy format: \n");
+		System.out.print("Enter date in dd/mm/yyyy format(ex. 06/01/1999,03/06/2000): \n");
 		String self = s.next();
 		String sibling = s.next();
 		birthDayDifference(self,sibling);
 		
 		System.out.print("*****************************\nTimeZone:\n");
-		timeZoneDifference(self, sibling);
+		System.out.print("Enter Timezone(ex. America/Montreal): ");
+		timeZoneDifference(self, sibling,s.next());
 		s.close();
 	}
 }

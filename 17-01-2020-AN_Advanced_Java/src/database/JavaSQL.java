@@ -13,12 +13,12 @@ public class JavaSQL {
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/test","root","roadrash");  
-			//here sonoo is database name, root is username and password  
+			//here test is database name, root is username
 			Statement stmt=con.createStatement();  
-			ResultSet rs=stmt.executeQuery("call joinme();");  
+			ResultSet rs=stmt.executeQuery("call joinme();");  // Calling Stored procedure
 			System.out.println("Id \t\t Name \t\t Branch");
 			while(rs.next())  
-			list.add(new Student(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5)));  
+			list.add(new Student(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5)));  // Initialize objects
 			con.close();
 			
 			System.out.print("Data:\n");
@@ -33,7 +33,7 @@ public class JavaSQL {
 
 
 
-
+// Entity Class
 class Student{
 	int id,cgpa;
 	String name, department, hod;

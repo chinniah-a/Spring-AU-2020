@@ -21,7 +21,7 @@ public class DomParser {
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
 		
-		Document document = documentBuilder.parse(new File("records.xml"));
+		Document document = documentBuilder.parse(new File("records.xml")); // Create document Tree from xml file
 		
 		document.getDocumentElement().normalize(); 
 		
@@ -32,7 +32,7 @@ public class DomParser {
 		
 		for(int i = 0; i < list.getLength(); i++) {
 			Node n = list.item(i);
-			if (n.getNodeType() == Node.ELEMENT_NODE) {
+			if (n.getNodeType() == Node.ELEMENT_NODE) {  // Extract Attributes
 				Element e = (Element) n;
 				System.out.println("Id: " + e.getElementsByTagName("Id").item(0).getTextContent());
 				System.out.println("Name: " + e.getElementsByTagName("Name").item(0).getTextContent());
