@@ -2,6 +2,7 @@ package shoppingcart;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 //import java.util.Random;
 import java.util.Scanner;
@@ -164,16 +165,31 @@ public class Main {
 		while(!exit) {
 			
 			System.out.println("Enter Your choice: \n1. Add item to cart.\n2. Remove from cart.\n3. View Cart\n4. Place Order\n5. Cancel Order.\n6. Print Catalog\n7. View Balance\n8. Exit");
-			int choice = s.nextInt();
+			
+			
+			int choice ;
+			try {
+			choice = Integer.parseInt(s.next());
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Please enter valid Input");
+				continue;
+				}
+			
+			
 			int i,j;
 			switch(choice) {
 			case 1: 
-				
+					try {
 					System.out.println("Enter Id and Quantity of the Product: ");
 					i = s.nextInt();
 					j = s.nextInt();
 					m.addToCart(i, j);
 					break;
+					}
+					catch(InputMismatchException e) {
+						System.out.println("Please enter valid Input");
+						break;}
 					
 					
 			case 2:
@@ -183,11 +199,15 @@ public class Main {
 					System.out.println("==============================================");
 					break;
 				}
-				System.out.println("Enter Id of the Product:");
-				i = s.nextInt();
-				m.deleteFromCart(i);
-				break;
-				
+				try {
+					System.out.println("Enter Id of the Product:");
+					i = s.nextInt();
+					m.deleteFromCart(i);
+					break;
+				}
+				catch(InputMismatchException e) {
+					System.out.println("Please enter valid Input");
+					break;}
 				
 			case 3:
 				if(m.cart.isEmpty()) {
@@ -218,11 +238,15 @@ public class Main {
 				}
 				System.out.println("==============================================");
 				m.printOrders();
-				
+				try {
 				System.out.println("Enter OrderId To delete: ");
 				m.cancelOrder(s.nextInt());
 				m.printcatalog(m.catalog);
 				break;
+				}
+				catch(InputMismatchException e) {
+					System.out.println("Please enter valid Input");
+					break;}
 				
 				
 			case 6:
@@ -244,11 +268,12 @@ public class Main {
 				break;
 				
 				
-			}
+			}}
 			
 			
-		}
 		
+		
+				
 		
 		//s.close();
 	}
