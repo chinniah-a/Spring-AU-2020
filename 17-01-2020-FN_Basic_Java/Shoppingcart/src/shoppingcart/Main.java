@@ -16,26 +16,27 @@ public class Main {
 	
 	int balance = 10000;
 	
-	public void addToCart(int i, int j) { //Adding Items to cart
+	public void addToCart(int itemId, int quantity) { //Adding Items to cart
 		
 		
-		if(!this.catalog.containsKey(i)) {
+		if(!this.catalog.containsKey(itemId)) {
 			System.out.println("No such Item Available!");
 			return;
 		}
-		if(j <= 0) {
+		
+		if(quantity <= 0) {
 			System.out.println("Please Enter A valid quantity");
 		}
 		
-		if(this.catalog.get(i).quantity < j) {
+		if(this.catalog.get(itemId).quantity < quantity) {
 			System.out.println("Cart Addition Exceeds Available Quantity \n");
 			return;
 		}
-		if(this.cart.containsKey(i)) {
-			this.cart.put(i, j + this.cart.get(i));
+		if(this.cart.containsKey(itemId)) {
+			this.cart.put(itemId, quantity + this.cart.get(itemId));
 			return;
 		}
-		this.cart.put(i, j);
+		this.cart.put(itemId, quantity);
 		
 	}
 
@@ -158,6 +159,8 @@ public class Main {
 		System.out.print("Enter Username: ");
 		String username = s.nextLine();
 		System.out.println("Hello " + username);
+		m.viewBalance();
+		System.out.println("==============================================");
 		
 		
 		boolean exit = false;
@@ -224,6 +227,8 @@ public class Main {
 			case 4:
 				System.out.println("==============================================");
 				m.placeOrder(username);
+				System.out.println("==============================================");
+				m.viewBalance();
 				System.out.println("==============================================");
 				break;
 				

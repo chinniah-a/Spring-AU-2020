@@ -2,6 +2,8 @@ package shoppingcart;
 
 import java.util.HashMap;
 
+// POJO for Order
+
 public class Order {
 	HashMap<Integer, Integer> order = new HashMap<Integer, Integer>();
 	String username;

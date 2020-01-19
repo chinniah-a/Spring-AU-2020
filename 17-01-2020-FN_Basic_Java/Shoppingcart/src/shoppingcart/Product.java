@@ -1,5 +1,7 @@
 package shoppingcart;
 
+
+// POJO for Product
 public class Product {
 	int Id,quantity,price;
 	String name;
