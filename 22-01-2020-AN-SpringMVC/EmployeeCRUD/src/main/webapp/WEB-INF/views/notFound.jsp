@@ -8,8 +8,8 @@
 </head>
 <body>
 	<center>
-	
-	<h1> Your Requested Resource was not found on ther server.</h1>
+	<h1>404</h1>
+	<h1> Your Requested Resource was not found on the server.</h1>
 	</center>
 </body>
 </html>
