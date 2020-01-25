@@ -19,7 +19,7 @@ import com.springAU.dao.EmployeeDAO;
 import com.springAU.model.Employee;
 
 @Controller
-public class MainController {
+public class MainController { // Web Controller
 	
 	@Autowired
 	private EmployeeDAO employeeDAO;
@@ -38,7 +38,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/")
-	public ModelAndView listEmployee(ModelAndView model) throws IOException{
+	public ModelAndView listEmployee(ModelAndView model) throws IOException{ 
 	    List<Employee> listEmployees = employeeDAO.fetchAll();
 	    model.addObject("listEmployees", listEmployees);
 	    
@@ -49,14 +49,14 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
-	public ModelAndView newEmployee(ModelAndView model) {
+	public ModelAndView newEmployee(ModelAndView model) { //Add Employee From
 	    Employee employee = new Employee();
 	    model.addObject("employee", employee);
 	    model.setViewName("EmployeeForm");
 	    return model;
 	}
 	
-	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
+	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST) // Method to save incoming Employee Object
 	public ModelAndView saveEmployee(@ModelAttribute Employee employee) throws IllegalPropertyException {
 		String[] validation = employee.validate() ;
 		if(!(validation.length == 0)) {
@@ -66,7 +66,7 @@ public class MainController {
 	    return new ModelAndView("redirect:/home");
 	}
 	
-	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET) // Delete Employee object
 	public ModelAndView deleteEmployee(HttpServletRequest request) {
 	    int Id = Integer.parseInt(request.getParameter("id"));
 	    employeeDAO.deletById(Id);
@@ -85,7 +85,7 @@ public class MainController {
 	}
 	
 	
-	 @ExceptionHandler(IllegalPropertyException.class)
+	 @ExceptionHandler(IllegalPropertyException.class) // Exception handling for illegal property set
 	  public ModelAndView handleError(HttpServletRequest req, IllegalPropertyException ex) {
 	    //logger.error("Request: " + req.getRequestURL() + " raised " + ex);
 
@@ -97,7 +97,7 @@ public class MainController {
 	    return mav;
 	  }
 	
-	@ExceptionHandler(IllegalURLException.class)
+	@ExceptionHandler(IllegalURLException.class) // Exception for illegal URL
 	public String urlNotFound() {
 		return "notFound";
 	}

@@ -4,7 +4,7 @@ public class IllegalPropertyException extends Exception {
 	
 	String error;
 	
-	public IllegalPropertyException(String propertyName, String value) {
+	public IllegalPropertyException(String propertyName, String value) { // Exception thrown at wrong value entered
 		// TODO Auto-generated constructor stub
 		
 		this.error = "The value of " + propertyName + " : " + value + " is Illegal.";

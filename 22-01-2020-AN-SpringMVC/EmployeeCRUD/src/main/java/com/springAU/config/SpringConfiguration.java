@@ -19,11 +19,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.springAU.dao.EmployeeDAO;
 import com.springAU.dao.EmployeeDAOImpl;
 
- 
+//Configuration file for the application
 @Configuration
 @ComponentScan(basePackages="com.*")
 @EnableWebMvc
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.properties") //fetch data from application.properties
 public class SpringConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Autowired
@@ -31,18 +31,18 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Bean
     public ViewResolver getViewResolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver(); //initialize web resolver
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
     }
 	
 	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) { //Add resource handlers
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 	
-	 public DataSource getDataSource() {
+	 public DataSource getDataSource() {  //Initialize the datasource using data obtained from application.properties
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	        dataSource.setDriverClassName(environment.getProperty("database.driver"));
 	        dataSource.setUrl(environment.getProperty("database.url"));
@@ -55,7 +55,7 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter {
 	 
 	 
 	 @Bean
-	 public EmployeeDAO getEmployeeDAO() {
+	 public EmployeeDAO getEmployeeDAO() { //return datasource
 		 System.out.println("Setting Up Database");
 		 return new EmployeeDAOImpl(getDataSource());
 	 }
