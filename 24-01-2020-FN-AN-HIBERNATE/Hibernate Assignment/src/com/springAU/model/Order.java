@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="orders") 
+@Table(name="Orders") 
 public class Order {
 	
 	@Id
@@ -35,7 +35,7 @@ public class Order {
 
 	@ElementCollection
 //	@CollectionTable(name="Order", joinColumns=@JoinColumn(name="order_id"))
-	private Collection<Product> productList = new ArrayList();
+	private Collection<Product> productList = new ArrayList<Product>();
 
 	public Collection<Product> getProductList() {
 		return productList;

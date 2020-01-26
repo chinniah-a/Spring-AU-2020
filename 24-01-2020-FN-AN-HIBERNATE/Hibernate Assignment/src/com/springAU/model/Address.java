@@ -3,8 +3,14 @@ package com.springAU.model;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Address {
+public class Address { //Embeddable Address Object
+	
+	
 
+	public Address() {
+		super();
+	}
+	
 	private int pincode;
 	private String Street;
 	public int getPincode() {
@@ -17,6 +23,11 @@ public class Address {
 		return Street;
 	}
 	public void setStreet(String street) {
+		Street = street;
+	}
+	public Address(int pincode, String street) {
+		super();
+		this.pincode = pincode;
 		Street = street;
 	}
 	

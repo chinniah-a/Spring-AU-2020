@@ -11,11 +11,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="buyers") 
+@Table(name="Buyers") 
 public class Buyer extends User{
 
 	@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="BUYER_ID")
+    @JoinColumn(name="buyerId")
 	private Collection<Order> orderList = new ArrayList<Order>();
 	
 	@Transient
@@ -33,5 +33,11 @@ public class Buyer extends User{
 		super(username, mobile_no, email);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Buyer( String username, String mobile_no, String email,Address homeAddress) {
+		super( username, mobile_no, email,homeAddress);
+		// TODO Auto-generated constructor stub
+	}
+
 
 }

@@ -14,9 +14,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users") 
+@Table(name="Users") 
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="USER_TYPE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name="userType", discriminatorType = DiscriminatorType.STRING)
 public class User {
 	
 	@Id
@@ -28,15 +28,15 @@ public class User {
 	
 	@Embedded
 	@AttributeOverrides({
-		@AttributeOverride(name="Street",column=@Column(name="HOME_STREET_NAME")),
-		@AttributeOverride(name="pincode",column=@Column(name="HOME_PINCODE"))
+		@AttributeOverride(name="Street",column=@Column(name="homeStreetName")),
+		@AttributeOverride(name="pincode",column=@Column(name="homePincode"))
 	})
 	private Address home_address;
 	
 	@Embedded
 	@AttributeOverrides({
-		@AttributeOverride(name="Street",column=@Column(name="OFFICE_STREET_NAME")),
-		@AttributeOverride(name="pincode",column=@Column(name="OFFICE_PINCODE"))
+		@AttributeOverride(name="Street",column=@Column(name="officeStreetName")),
+		@AttributeOverride(name="pincode",column=@Column(name="officePincode"))
 	})
 	private Address office_address;
 	
@@ -46,6 +46,14 @@ public class User {
 		this.username = username;
 		this.mobile_no = mobile_no;
 		this.email = email;
+	}
+	
+	public User( String username, String mobile_no, String email, Address homeAddress) {
+		super();
+		this.username = username;
+		this.mobile_no = mobile_no;
+		this.email = email;
+		this.home_address = homeAddress;
 	}
 	public int getUserid() {
 		return userid;

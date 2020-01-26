@@ -1,7 +1,5 @@
 package com.springAU;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.springAU.model.Address;
 import com.springAU.model.Buyer;
 import com.springAU.model.Order;
 import com.springAU.model.Payment;
@@ -21,15 +20,18 @@ import com.springAU.model.Seller;
 
 public class Driver {
 	
+	/**
+	 * @param args
+	 */
 	public static void main(String [] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory(); // Begin Session With the Database
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		System.out.println("**********************Welcome to Online Marketplace**********************");
+		System.out.println("**********************Online Marketplace Using Hibernate**********************");
 		
 		/*System.out.print("Please choose: \n1. Login\n2.Signup");
 		
@@ -47,17 +49,27 @@ public class Driver {
 		
 		
 		int choice = 0;
-		while(choice!=3) {
+		
+		while(choice!=3) { // Menu driven program to add products and do shopping
 			
-			System.out.println("Name:");
+			
+			System.out.println("Please Enter your details: ");
+			System.out.print("Name: ");
 			String name = sc.next();
 			
-			System.out.println("Email:");
+			System.out.print("Email: ");
 			String email = sc.next();
 			
-			System.out.println("Mobile:");
-			String number = sc.next();
+			System.out.print("Contact No.: ");
+			String contact = sc.next();
 			
+			System.out.print("Street name(no spaces): "); // Take details from the user
+			String street = sc.next();
+			
+			System.out.print("Pincode: ");
+			int pincode = sc.nextInt();
+			
+			Address address = new Address(pincode, street); // Take home Address
 			
 			System.out.println("*****************************************************");
 			
@@ -67,30 +79,48 @@ public class Driver {
 				
 		if(choice==1) {
 			
-			Seller seller = new Seller(name, number, email);
-			int choice1 =0;
+			Seller seller = new Seller(name, contact, email,address);
+			int sellerChoice =0;
 			int sellerId = 0;
-			while(choice1!=3) {
+			
+			System.out.print("Name Your first Product:");
+			String productName = sc.next();
+			System.out.print("What Is your product about:");
+			String productDescription = sc.next();
+			System.out.print("Product price:");
+			int price = sc.nextInt();
+			Product product = new Product(productName,price,productDescription);
+			
+			session.save(product);
+	
+			System.out.println(product.toString());
+			
+			seller.getProductList().add(product);
+			
+			sellerId = (Integer)session.save(seller);
+	
+			System.out.println("Your Id is: " + sellerId + " Please Remember it!");
+			
+			product = null;
+			
+			session.getTransaction().commit();
+			
+			session.beginTransaction();
+		
+			while(sellerChoice!=3) {
 				System.out.println("1.Add Product \n2.View Product \n3.Exit");
 				
-				choice1 = sc.nextInt();
-				switch(choice1) {
+				sellerChoice = sc.nextInt();
+				switch(sellerChoice) {
 			
 					case 1:
-						System.out.println("Product name:");
-						String pName = sc.next();
-						System.out.println("Product description:");
-						String pDescription = sc.next();
-						System.out.println("Product price:");
-						int price = sc.nextInt();
-//				session.save
-//				for(Product p:seller.getProductList()) {
-//					System.out.println(p.getProductNAme());
-//					System.out.println(p.getDescription());
-//					System.out.println(p.getPrice());
-//				}
-				
-						Product product = new Product(pName,price,pDescription);
+						System.out.print("Name Your Product:");
+						productName = sc.next();
+						System.out.print("What Is your product about:");
+						productDescription = sc.next();
+						System.out.print("Product price:");
+						price = sc.nextInt();
+						product = new Product(productName,price,productDescription);
 						
 						session.save(product);
 				
@@ -120,7 +150,9 @@ public class Driver {
 						
 							break;
 					
-					case 3: System.out.println("Exit Successfully!");
+					case 3: 
+						
+							System.out.println("Thank You!");
 					
 							break;
 					
@@ -131,9 +163,9 @@ public class Driver {
 				
 		}	
 			
-		if(choice==2) {
+		if(choice==2) { // For buyer
 			
-			Buyer buyer = new Buyer(name, number, email);
+			Buyer buyer = new Buyer(name, contact, email);
 			
 			int choice3=0;
 			
@@ -141,13 +173,13 @@ public class Driver {
 			
 			while(choice3!=4){
 				
-				System.out.println("1. View Products\n2. Cart Products\n3. View Orders\n 3.Exit");
+				System.out.println("1. View Products\n2. Cart Products\n3. View Orders\n4.Exit");
 				
 				choice3 = sc.nextInt();
 				
 				switch(choice3) {
 					case 1: 
-							List<Product> products = session.createQuery("from Product", Product.class).list();
+							List<Product> products = (List<Product>)session.getNamedQuery(Product.GET_ALL_PRODUCTS).list();
 							for(Product p:products) 
 									System.out.println(p.toString());
 									System.out.println("Enter Id to add to cart: ");
@@ -161,6 +193,7 @@ public class Driver {
 							
 							System.out.println("*****************************************************");
 							System.out.println("Product" + selected.get(0).getProductNAme() + " Successfully Added to Cart.\n New Cart: ");
+							
 							
 					
 							int total = 0;
@@ -189,27 +222,28 @@ public class Driver {
 							}
 							System.out.println("Total: " + total);
 							System.out.println("*****************************************************\n\n");
-							System.out.print("1. Confirm Order\n2. Cancel");
+							System.out.print("1. Confirm Order\n2.Go Back");
 							int orderConfirmation = sc.nextInt();
+							System.out.println("*****************************************************");
 							int orderId;
 							switch(orderConfirmation) {
 							
 								case 1:
-									Order order = new Order();
+									Order newOrder = new Order();
 									Payment payment = new Payment();
-									System.out.println("Please enter Mode of Payment: ");
+									System.out.println("Payment Mode: ");
 									payment.setPayment_amt(total);
 									payment.setPayment_mode(sc.next());
-									DateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 									Date timeStamp = new Date();
 									payment.setPayment_date(timeStamp);
-									order.setProductList(cart);
-									order.setPayment(payment);
-									order.setBuyer(buyer);
+									newOrder.setProductList(cart);
+									newOrder.setPayment(payment);
+									newOrder.setBuyer(buyer);
 									session.save(payment);
-									orderId = (Integer) session.save(order);
+									orderId = (Integer) session.save(newOrder);
 									System.out.println("*****************************************************");
-									System.out.println("Order: \n" + order.toString());
+									System.out.println("Your Order Id is: " + orderId);
+									System.out.println("Order: \n" + newOrder.toString());
 									System.out.println("*****************************************************");
 									break;
 							}
@@ -222,9 +256,10 @@ public class Driver {
 						}
 						break;
 						
-					case 4:System.out.println("Exit Successfully!");
+					case 4:System.out.println("Thank You!");
 						System.out.println("*****************************************************");
 						break;
+						
 					default:System.out.println("Invalid option");
 				
 			}
@@ -233,9 +268,12 @@ public class Driver {
 		}
 			
 		
-		else System.out.println("Enter Correct option");
+		else if (choice > 3) System.out.println("Invalid Choice");
 		
 		}
+		
+		
+		sc.close();
 	}
 
 }

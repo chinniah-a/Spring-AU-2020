@@ -16,7 +16,7 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/onlinemarket</property> 
+        <property name="connection.url">jdbc:postgresql://localhost:5432/marketplace</property> 
         <!-- <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/onlinemarket</property> -->
         
@@ -38,15 +38,15 @@
         <property name="show_sql">false</property>
 
         <!-- Drop and re-create the database schema on startup -->
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 		
 		
         <!-- Names the annotated entity class -->
         <mapping class="com.springAU.model.User"/>
         <mapping class="com.springAU.model.Buyer"/>
+        <mapping class="com.springAU.model.Address"/>
         <mapping class="com.springAU.model.Seller"/>
         <mapping class="com.springAU.model.Product"/>
-        <mapping class="com.springAU.model.Address"/>
         <mapping class="com.springAU.model.Order"/>
         <mapping class="com.springAU.model.Payment"/>
         
